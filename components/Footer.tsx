@@ -1,13 +1,4 @@
-import {
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-  Platform,
-  FlatList,
-  ScrollView,
-  TextInput,
-} from 'react-native';
+import { StatusBar, StyleSheet, Text, View, TextInput } from 'react-native';
 
 import React from 'react';
 

@@ -1,13 +1,4 @@
-import {
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-  Platform,
-  FlatList,
-  ScrollView,
-  TextInput,
-} from 'react-native';
+import { StatusBar, StyleSheet, Text, View } from 'react-native';
 
 import FontAwesome from '@react-native-vector-icons/fontawesome';
 

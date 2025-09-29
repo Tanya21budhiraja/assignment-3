@@ -1,13 +1,4 @@
-import {
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-  Platform,
-  FlatList,
-  ScrollView,
-  TextInput,
-} from 'react-native';
+import { StyleSheet, Text, View, FlatList } from 'react-native';
 
 function List() {
   const data = [
@@ -58,7 +49,7 @@ function List() {
     { id: '45', name: 'Paper Boat Aam Panna 600ml', pcs: '27.00 Pcs.' },
     {
       id: '46',
-      name: 'Everest Chholimage.pnge Masala 100g',
+      name: 'EveresChholimagnge Masala 100g',
       pcs: '90.00 Pcs.',
     },
     { id: '47', name: 'MDH Garam Masala 200g', pcs: '65.00 Pcs.' },
