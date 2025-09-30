@@ -1,18 +1,39 @@
-import { StatusBar, StyleSheet, Text, View, TextInput } from 'react-native';
+import {
+  StatusBar,
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  Platform,
+} from 'react-native';
 
 import React from 'react';
 
 function Footer() {
-  const [totalAmount, setTotalAmount] = React.useState('0');
+  const [totalAmount, setTotalAmount] = React.useState('');
 
   return (
     <View style={FooterStyle.container}>
       <Text style={FooterStyle.label}>Total Qty:</Text>
       <TextInput
+        placeholder="Enter your amount"
+        placeholderTextColor="#999999"
         style={FooterStyle.value}
         value={totalAmount}
-        onChangeText={setTotalAmount}
-        keyboardType="numeric"
+        onChangeText={text => {
+          // If first and last decimal position are same, there's only one (or none)
+          if (text.indexOf('.') === text.lastIndexOf('.')) {
+            setTotalAmount(text);
+          }
+        }}
+        // keyboardType="numeric"
+        keyboardType={
+          Platform.OS === 'android' ? 'number-pad' : 'numbers-and-punctuation'
+        }
+        // returnKeyType="done"
+        textContentType="none"
+        autoCorrect={false}
+        maxLength={10}
       />
     </View>
   );

@@ -1,4 +1,12 @@
-import { StyleSheet, Text, View } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  KeyboardAvoidingView,
+  Platform,
+  Keyboard,
+} from 'react-native';
 import StockStatusCard from './StockStatusCard';
 import List from './List';
 import Footer from './Footer';
@@ -11,17 +19,25 @@ function MainContent() {
   const insets = useSafeAreaInsets();
   return (
     <View style={{ flex: 1 }}>
-      <View style={[styles.headerSection, { paddingTop: insets.top + 20 }]}>
-        <View style={styles.navBar}>
-          <FontAwesome name="bars" size={24} color="white" />
-          <Text style={styles.navTitle}>Demo Company</Text>
-          <FontAwesome name="caret-down" size={24} color="white" />
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 0}
+      >
+        <View style={[styles.headerSection, { paddingTop: insets.top + 20 }]}>
+          <View style={styles.navBar}>
+            <FontAwesome name="bars" size={24} color="white" />
+            <Text style={styles.navTitle}>Demo Company</Text>
+            <FontAwesome name="caret-down" size={24} color="white" />
+          </View>
         </View>
-      </View>
-      <StockStatusCard />
-      <Date />
-      <List />
-      <Footer />
+        <StockStatusCard />
+        <Date />
+        <View style={{ flex: 1 }}>
+          <List />
+        </View>
+        <Footer />
+      </KeyboardAvoidingView>
     </View>
   );
 }
@@ -37,8 +53,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderEndEndRadius: 15,
     borderEndStartRadius: 15,
-    borderWidth: 1.2,
-    borderColor: '#000080',
+    // borderWidth: 1.2,
+    // borderColor: '#000080',
   },
   navBar: {
     flexDirection: 'row',
