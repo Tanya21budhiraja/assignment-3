@@ -8,7 +8,7 @@
 import React from 'react';
 import MainContent from './components/MainContent';
 
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 function App() {
   return (

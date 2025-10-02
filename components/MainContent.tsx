@@ -8,6 +8,7 @@ import {
   Keyboard,
 } from 'react-native';
 import StockStatusCard from './StockStatusCard';
+import { KeyboardController } from 'react-native-keyboard-controller';
 import List from './List';
 import Footer from './Footer';
 import Date from './Date';
@@ -22,7 +23,7 @@ function MainContent() {
       <KeyboardAvoidingView
         style={{ flex: 1 }}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 0}
+        // keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 0}/
       >
         <View style={[styles.headerSection, { paddingTop: insets.top + 20 }]}>
           <View style={styles.navBar}>

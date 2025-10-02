@@ -6,11 +6,16 @@ import {
   TextInput,
   Platform,
 } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import React from 'react';
 
 function Footer() {
+  const insets = useSafeAreaInsets();
   const [totalAmount, setTotalAmount] = React.useState('');
+
+  const decimalRegex = /^[0-9]*.?[0-9]*$/;
+  const numberRegex = /[^0-9.]/g;
 
   return (
     <View style={FooterStyle.container}>
@@ -21,16 +26,15 @@ function Footer() {
         style={FooterStyle.value}
         value={totalAmount}
         onChangeText={text => {
-          // If first and last decimal position are same, there's only one (or none)
-          if (text.indexOf('.') === text.lastIndexOf('.')) {
-            setTotalAmount(text);
+          const newtext = text.replace(numberRegex, '');
+
+          if (decimalRegex.test(newtext)) {
+            setTotalAmount(newtext);
           }
         }}
         // keyboardType="numeric"
-        keyboardType={
-          Platform.OS === 'android' ? 'number-pad' : 'numbers-and-punctuation'
-        }
-        // returnKeyType="done"
+        keyboardType={Platform.OS === 'android' ? 'number-pad' : 'numeric'}
+        returnKeyType="done"
         textContentType="none"
         autoCorrect={false}
         maxLength={10}
