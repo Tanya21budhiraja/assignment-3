@@ -1,25 +1,30 @@
+import React from 'react';
 import { StyleSheet, Text, View, FlatList } from 'react-native';
 import { data } from './data';
 
-const ITEM_HEIGHT = 40;
-const SEPARATOR_HEIGHT = 31;
+const ListItem = React.memo(
+  ({
+    item,
+  }: {
+    item: { id: number; name: string; pcs: number; price?: number };
+  }) => (
+    <View style={list.st}>
+      <Text style={list.itemText}>{item.name}</Text>
+      <Text style={list.pcsText}>Pcs : {item.pcs}</Text>
+      {item.price && <Text style={list.priceText}>Price: ${item.price}</Text>}
+    </View>
+  ),
+);
+
+const ItemSeparator = React.memo(() => <View style={list.separator} />);
+
+const ListHeader = React.memo(() => <View style={list.header} />);
 
 const renderItem = ({
   item,
 }: {
-  item: { id: number; name: string; pcs: number };
-}) => (
-  <View style={list.st}>
-    <Text style={{ flex: 1, color: '#3A3A3A' }}>{item.name}</Text>
-    <Text style={{ color: '#3A3A3A' }}> Pcs : {item.pcs}</Text>
-  </View>
-);
-
-// const getItemLayout = (_: any, index: number) => ({
-//   length: ITEM_HEIGHT,
-//   offset: (ITEM_HEIGHT + SEPARATOR_HEIGHT) * index + 16,
-//   index,
-// });
+  item: { id: number; name: string; pcs: number; price?: number };
+}) => <ListItem item={item} />;
 
 function List() {
   return (
@@ -27,29 +32,15 @@ function List() {
       <FlatList
         data={data}
         renderItem={renderItem}
-        keyExtractor={item => item.id.toString()}
+        keyExtractor={item => String(item.id)}
         keyboardShouldPersistTaps="handled"
-        // getItemLayout={getItemLayout}
-        ItemSeparatorComponent={() => (
-          <View
-            style={{
-              height: 1,
-              backgroundColor: '#E0E0E0',
-              marginVertical: 15,
-              marginHorizontal: 4,
-            }}
-          />
-        )}
-        ListHeaderComponent={() => (
-          <View
-            style={{
-              height: 1,
-              backgroundColor: '#E0E0E0',
-              marginHorizontal: 4,
-              marginBottom: 15,
-            }}
-          />
-        )}
+        removeClippedSubviews={true}
+        maxToRenderPerBatch={10}
+        updateCellsBatchingPeriod={50}
+        windowSize={10}
+        initialNumToRender={15}
+        ItemSeparatorComponent={ItemSeparator}
+        ListHeaderComponent={ListHeader}
       />
     </View>
   );
@@ -57,10 +48,33 @@ function List() {
 
 const list = StyleSheet.create({
   st: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: 'column',
+    // justifyContent: 'space-between',
     paddingHorizontal: 20,
     paddingVertical: 10,
+  },
+  itemText: {
+    flex: 1,
+    color: '#3A3A3A',
+  },
+  pcsText: {
+    color: '#3A3A3A',
+  },
+  priceText: {
+    color: '#3A3A3A',
+    marginTop: 4,
+  },
+  separator: {
+    height: 1,
+    backgroundColor: '#E0E0E0',
+    marginVertical: 15,
+    marginHorizontal: 4,
+  },
+  header: {
+    height: 1,
+    backgroundColor: '#E0E0E0',
+    marginHorizontal: 4,
+    marginBottom: 15,
   },
 });
 
