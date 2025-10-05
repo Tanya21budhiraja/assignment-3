@@ -11,7 +11,7 @@ const ListItem = React.memo(
     <View style={list.st}>
       <Text style={list.itemText}>{item.name}</Text>
       <Text style={list.pcsText}>Pcs : {item.pcs}</Text>
-      {item.price && <Text style={list.priceText}>Price: ${item.price}</Text>}
+      {/* {item.price && <Text style={list.priceText}>Price: ${item.price}</Text>} */}
     </View>
   ),
 );
@@ -23,8 +23,10 @@ const ListHeader = React.memo(() => <View style={list.header} />);
 const renderItem = ({
   item,
 }: {
-  item: { id: number; name: string; pcs: number; price?: number };
+  item: { id: number; name: string; pcs: number };
 }) => <ListItem item={item} />;
+
+// price?: number
 
 function List() {
   return (
@@ -48,8 +50,8 @@ function List() {
 
 const list = StyleSheet.create({
   st: {
-    flexDirection: 'column',
-    // justifyContent: 'space-between',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     paddingHorizontal: 20,
     paddingVertical: 10,
   },
